@@ -1,7 +1,8 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { DefaultChatTransport } from "ai";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Turnstile from "react-turnstile";
 import { Bot, MessageCircle, Send, X } from "lucide-react";
 
@@ -9,16 +10,24 @@ const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!;
 
 export function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [isVerified, setIsVerified] = useState(false);
+  const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const turnstileTokenRef = useRef<string | null>(null);
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading, error } =
-    useChat({
-      api: "/api/chat",
-      body: { turnstileToken },
-    });
+  const transport = useMemo(
+    () =>
+      new DefaultChatTransport({
+        api: "/api/chat",
+        body: () => ({ turnstileToken: turnstileTokenRef.current }),
+      }),
+    []
+  );
+
+  const { messages, sendMessage, status, error } = useChat({ transport });
+
+  const isLoading = status === "submitted" || status === "streaming";
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -35,13 +44,30 @@ export function ChatBot() {
   }, [isOpen, isVerified]);
 
   const handleTurnstileVerify = (token: string) => {
-    setTurnstileToken(token);
+    turnstileTokenRef.current = token;
     setIsVerified(true);
+  };
+
+  const handleSend = (text: string) => {
+    if (!text.trim() || isLoading) return;
+    sendMessage({ text });
+    setInput("");
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleSend(input);
+  };
+
+  const getMessageText = (message: (typeof messages)[number]) => {
+    return message.parts
+      .filter((part) => part.type === "text")
+      .map((part) => part.text)
+      .join("");
   };
 
   return (
     <>
-      {/* Floating button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-all hover:scale-105 hover:shadow-xl active:scale-95"
@@ -50,9 +76,8 @@ export function ChatBot() {
         {isOpen ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>
 
-      {/* Chat window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 flex h-[500px] w-[380px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
+        <div className="fixed bottom-24 right-6 z-50 flex h-125 w-95 max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
           {/* Header */}
           <div className="flex items-center gap-3 border-b border-border bg-secondary/50 px-4 py-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/20">
@@ -66,7 +91,6 @@ export function ChatBot() {
             </div>
           </div>
 
-          {/* Body */}
           <div className="flex-1 overflow-y-auto p-4">
             {!isVerified ? (
               <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
@@ -110,18 +134,7 @@ export function ChatBot() {
                       ].map((suggestion) => (
                         <button
                           key={suggestion}
-                          onClick={() => {
-                            const fakeEvent = {
-                              target: { value: suggestion },
-                            } as React.ChangeEvent<HTMLInputElement>;
-                            handleInputChange(fakeEvent);
-                            setTimeout(() => {
-                              const form = document.getElementById("chat-form");
-                              form?.dispatchEvent(
-                                new Event("submit", { bubbles: true, cancelable: true })
-                              );
-                            }, 50);
-                          }}
+                          onClick={() => handleSend(suggestion)}
                           className="rounded-full border border-border bg-secondary/50 px-3 py-1.5 text-xs text-foreground transition-colors hover:bg-secondary"
                         >
                           {suggestion}
@@ -145,7 +158,7 @@ export function ChatBot() {
                           : "rounded-bl-md bg-secondary text-foreground"
                       }`}
                     >
-                      {message.content}
+                      {getMessageText(message)}
                     </div>
                   </div>
                 ))}
@@ -173,17 +186,16 @@ export function ChatBot() {
             )}
           </div>
 
-          {/* Input */}
           {isVerified && (
             <form
               id="chat-form"
-              onSubmit={handleSubmit}
+              onSubmit={handleFormSubmit}
               className="flex items-center gap-2 border-t border-border p-3"
             >
               <input
                 ref={inputRef}
                 value={input}
-                onChange={handleInputChange}
+                onChange={(e) => setInput(e.target.value)}
                 placeholder="Escribe tu mensaje..."
                 className="flex-1 rounded-xl border border-border bg-input px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 disabled={isLoading}
