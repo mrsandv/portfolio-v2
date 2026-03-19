@@ -2,7 +2,7 @@ import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
 
 const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY!;
-const SYSTEM_PROMPT = process.env.SYSTEM_PROMPT!;
+const SYSTEM_PROMPT = process.env.SYSTEM_PROMPT ?? "";
 
 const RATE_LIMIT_MAX = 10;
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
