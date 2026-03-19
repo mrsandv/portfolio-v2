@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
+import { ChatBot } from "@/components/chat-bot";
 import KoFiWidget from "@/components/tip-jar";
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -45,6 +46,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className="font-san antialiased">
         <KoFiWidget />
+        <ChatBot />
         {children}
       </body>
     </html>
