@@ -5,7 +5,10 @@ import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-const navLinks = [{ label: "Projects", href: "#projects" }];
+const navLinks = [
+  { label: "Projects", href: "#projects" },
+  { label: "Snippets", href: "/snippets" },
+];
 
 export function Navbar({
   staticLinks,

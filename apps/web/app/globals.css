@@ -152,6 +152,55 @@
     animation: fade-in-up 0.6s ease-out forwards;
 }
 
+.prose-snippet {
+    color: var(--foreground);
+    line-height: 1.7;
+
+    h1, h2, h3, h4 {
+        font-weight: 600;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        color: var(--foreground);
+    }
+
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.1rem; }
+
+    p {
+        margin-bottom: 1em;
+    }
+
+    a {
+        color: var(--primary);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    code {
+        background: var(--secondary);
+        padding: 0.15em 0.4em;
+        border-radius: 0.25rem;
+        font-size: 0.875em;
+    }
+
+    ul, ol {
+        padding-left: 1.5em;
+        margin-bottom: 1em;
+    }
+
+    ul { list-style: disc; }
+    ol { list-style: decimal; }
+
+    li { margin-bottom: 0.25em; }
+
+    blockquote {
+        border-left: 3px solid var(--border);
+        padding-left: 1em;
+        color: var(--muted-foreground);
+        margin-bottom: 1em;
+    }
+}
+
 @utility glass {
     background: oklch(0.14 0.005 260 / 0.6);
     backdrop-filter: blur(12px);

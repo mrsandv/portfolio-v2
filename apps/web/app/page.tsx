@@ -2,6 +2,7 @@ import { BentoPortfolio } from "@/components/bento-portfolio";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
+import { TopSnippets } from "@/components/top-snippets";
 
 export default function Home() {
   const staticLinks: Record<string, string> = {
@@ -12,6 +13,7 @@ export default function Home() {
       <Navbar staticLinks={staticLinks} />
       <Hero staticLinks={staticLinks} />
       <BentoPortfolio />
+      <TopSnippets />
       <Footer />
     </main>
   );

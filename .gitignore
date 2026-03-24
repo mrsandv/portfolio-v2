@@ -1,5 +1,15 @@
-
+# JS
 node_modules/
 .next/
+
+# Go
+server
+apps/api/server
+apps/api/api
+apps/api/tmp/
+
+# Env
 .env
+
+# OS
 .DS_Store

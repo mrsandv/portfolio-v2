@@ -2,8 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
-import { ChatBot } from "@/components/chat-bot";
-import KoFiWidget from "@/components/tip-jar";
+import { FeatureGatedWidgets } from "@/components/feature-gated-widgets";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -45,7 +44,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="font-san antialiased">
-        <KoFiWidget />
         {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
           <script
             defer
@@ -53,7 +51,7 @@ export default function RootLayout({
             data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
           />
         )}
-        <ChatBot />
+        <FeatureGatedWidgets />
         {children}
       </body>
     </html>

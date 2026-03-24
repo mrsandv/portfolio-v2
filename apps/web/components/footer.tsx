@@ -35,7 +35,7 @@ export function Footer() {
           ))}
         </div>
 
-        <p className="text-xs text-muted-foreground">{`Built with 💜`}</p>
+        <p className="text-xs text-muted-foreground">{`Built with 💜 by mrsan`}</p>
       </div>
     </footer>
   );
