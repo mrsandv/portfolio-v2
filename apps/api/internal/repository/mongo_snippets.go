@@ -68,33 +68,44 @@ func (r *MongoSnippetRepo) Delete(ctx context.Context, slug string) error {
 func (r *MongoSnippetRepo) ToggleLike(ctx context.Context, slug string, ip string) (bool, int, error) {
 	filter := bson.D{{Key: "slug", Value: slug}}
 
-	// Check if IP already liked
-	hasLiked := r.col.FindOne(ctx, bson.D{
+	// Ensure likedIPs is an array (fix null values from old records)
+	r.col.UpdateOne(ctx, bson.D{
 		{Key: "slug", Value: slug},
-		{Key: "likedIPs", Value: ip},
+		{Key: "likedIPs", Value: nil},
+	}, bson.D{
+		{Key: "$set", Value: bson.D{{Key: "likedIPs", Value: bson.A{}}}},
 	})
 
-	var update bson.D
-	var liked bool
-	if hasLiked.Err() == mongo.ErrNoDocuments {
-		// Add like
-		update = bson.D{
-			{Key: "$addToSet", Value: bson.D{{Key: "likedIPs", Value: ip}}},
-			{Key: "$inc", Value: bson.D{{Key: "likes", Value: 1}}},
+	// Try to add the like atomically: only matches if IP is NOT already in likedIPs
+	addFilter := bson.D{
+		{Key: "slug", Value: slug},
+		{Key: "likedIPs", Value: bson.D{{Key: "$ne", Value: ip}}},
+	}
+	addUpdate := bson.D{
+		{Key: "$addToSet", Value: bson.D{{Key: "likedIPs", Value: ip}}},
+		{Key: "$inc", Value: bson.D{{Key: "likes", Value: 1}}},
+	}
+
+	res, err := r.col.UpdateOne(ctx, addFilter, addUpdate)
+	if err != nil {
+		return false, 0, err
+	}
+
+	liked := true
+	if res.ModifiedCount == 0 {
+		// IP already liked — remove it atomically
+		liked = false
+		removeFilter := bson.D{
+			{Key: "slug", Value: slug},
+			{Key: "likedIPs", Value: ip},
 		}
-		liked = true
-	} else {
-		// Remove like
-		update = bson.D{
+		removeUpdate := bson.D{
 			{Key: "$pull", Value: bson.D{{Key: "likedIPs", Value: ip}}},
 			{Key: "$inc", Value: bson.D{{Key: "likes", Value: -1}}},
 		}
-		liked = false
-	}
-
-	_, err := r.col.UpdateOne(ctx, filter, update)
-	if err != nil {
-		return false, 0, err
+		if _, err := r.col.UpdateOne(ctx, removeFilter, removeUpdate); err != nil {
+			return false, 0, err
+		}
 	}
 
 	// Get updated likes count

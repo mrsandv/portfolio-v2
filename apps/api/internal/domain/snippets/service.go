@@ -33,6 +33,9 @@ func (s *Service) Create(ctx context.Context, snippet *Snippet) error {
 	if snippet.Tags == nil {
 		snippet.Tags = []string{}
 	}
+	if snippet.LikedIPs == nil {
+		snippet.LikedIPs = []string{}
+	}
 	return s.repo.Create(ctx, snippet)
 }
 

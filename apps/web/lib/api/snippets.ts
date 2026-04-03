@@ -3,29 +3,41 @@ import type { Snippet } from "@/lib/types/snippet";
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
 export async function getSnippets(): Promise<Snippet[]> {
-  const res = await fetch(`${API_BASE}/api/snippets`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) return [];
-  return res.json();
+  try {
+    const res = await fetch(`${API_BASE}/api/snippets`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
+  }
 }
 
 export async function getSnippetBySlug(
   slug: string
 ): Promise<Snippet | null> {
-  const res = await fetch(`${API_BASE}/api/snippets/${slug}`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) return null;
-  return res.json();
+  try {
+    const res = await fetch(`${API_BASE}/api/snippets/${slug}`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return null;
+    return res.json();
+  } catch {
+    return null;
+  }
 }
 
 export async function getTopSnippets(): Promise<Snippet[]> {
-  const res = await fetch(`${API_BASE}/api/snippets/top`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) return [];
-  return res.json();
+  try {
+    const res = await fetch(`${API_BASE}/api/snippets/top`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
+  }
 }
 
 export async function likeSnippet(

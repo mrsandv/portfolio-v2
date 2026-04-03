@@ -11,12 +11,14 @@ services:
   web:
     build:
       context: ./apps/web
+      args:
+        - API_URL=http://api:8080
     ports:
       - "3000:3000"
     env_file:
       - ./apps/web/.env
     environment:
-      - NEXT_PUBLIC_API_URL=http://api:8080
+      - API_URL=http://api:8080
     restart: unless-stopped
     depends_on:
       - api

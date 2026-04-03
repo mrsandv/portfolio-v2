@@ -9,7 +9,7 @@ const nextConfig = {
   },
   async rewrites() {
     const apiUrl =
-      process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+      process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
     return [
       {
         source: "/api/flags",
@@ -30,6 +30,10 @@ const nextConfig = {
       {
         source: "/api/snippets/:slug",
         destination: `${apiUrl}/api/snippets/:slug`,
+      },
+      {
+        source: "/api/admin/:path*",
+        destination: `${apiUrl}/api/admin/:path*`,
       },
     ];
   },

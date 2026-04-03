@@ -1,0 +1,35 @@
+services:
+  api:
+    image: ghcr.io/${GITHUB_REPO}/api:latest
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./apps/api/.env
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  web:
+    image: ghcr.io/${GITHUB_REPO}/web:latest
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./apps/web/.env
+    environment:
+      - API_URL=http://api:8080
+    restart: unless-stopped
+    depends_on:
+      - api
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.docker/config.json:/config.json:ro
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_POLL_INTERVAL=60
+    restart: unless-stopped
