@@ -3,7 +3,9 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-RUN CGO_ENABLED=0 go build -o api ./cmd/server/
+ARG TARGETOS
+ARG TARGETARCH
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o api ./cmd/server/
 
 FROM alpine:3.21
 WORKDIR /app
