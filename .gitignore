@@ -6,10 +6,10 @@ node_modules/
 dist/
 build/
 
-# Go
-server
-apps/api/server
-apps/api/api
+# Go binaries
+/server
+/apps/api/server
+/apps/api/api
 apps/api/tmp/
 
 # Env
