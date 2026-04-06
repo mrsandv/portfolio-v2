@@ -2,6 +2,7 @@
 
 import { Link2, Linkedin, Twitter } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
 export function ShareButtons({
@@ -11,6 +12,7 @@ export function ShareButtons({
   title: string;
   slug: string;
 }) {
+  const t = useTranslations("actions");
   const [copied, setCopied] = useState(false);
 
   const url =
@@ -40,14 +42,14 @@ export function ShareButtons({
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-xs text-muted-foreground">Share:</span>
-      <Button variant="outline" size="icon-sm" onClick={copyLink} aria-label="Copy link">
+      <span className="text-xs text-muted-foreground">{t("share")}</span>
+      <Button variant="outline" size="icon-sm" onClick={copyLink} aria-label={t("copyLink")}>
         <Link2 className={`size-4 ${copied ? "text-green-400" : ""}`} />
       </Button>
-      <Button variant="outline" size="icon-sm" onClick={shareTwitter} aria-label="Share on X">
+      <Button variant="outline" size="icon-sm" onClick={shareTwitter} aria-label={t("shareTwitter")}>
         <Twitter className="size-4" />
       </Button>
-      <Button variant="outline" size="icon-sm" onClick={shareLinkedIn} aria-label="Share on LinkedIn">
+      <Button variant="outline" size="icon-sm" onClick={shareLinkedIn} aria-label={t("shareLinkedIn")}>
         <Linkedin className="size-4" />
       </Button>
     </div>

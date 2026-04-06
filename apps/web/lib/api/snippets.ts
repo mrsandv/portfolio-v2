@@ -40,6 +40,32 @@ export async function getTopSnippets(): Promise<Snippet[]> {
   }
 }
 
+export async function getSnippetsByCategory(
+  category: string
+): Promise<Snippet[]> {
+  try {
+    const res = await fetch(`${API_BASE}/api/snippets/category/${category}`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
+  }
+}
+
+export async function getCategories(): Promise<string[]> {
+  try {
+    const res = await fetch(`${API_BASE}/api/snippets/categories`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
+  }
+}
+
 export async function likeSnippet(
   slug: string
 ): Promise<{ liked: boolean; likes: number }> {

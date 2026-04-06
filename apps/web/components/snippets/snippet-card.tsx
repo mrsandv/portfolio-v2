@@ -1,18 +1,21 @@
+"use client";
+
 import { Heart } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { useLocale } from "@/components/locale-provider";
 import type { Snippet } from "@/lib/types/snippet";
 
 export function SnippetCard({ snippet }: { snippet: Snippet }) {
-  const date = new Date(snippet.createdAt).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  const { locale } = useLocale();
+  const date = new Date(snippet.createdAt).toLocaleDateString(
+    locale === "es" ? "es-MX" : "en-US",
+    { year: "numeric", month: "short", day: "numeric" }
+  );
 
   return (
     <Link
-      href={`/snippets/${snippet.slug}`}
+      href={snippet.category ? `/snippets/${snippet.category}/${snippet.slug}` : `/snippets/${snippet.slug}`}
       className="group block rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary/50"
     >
       <div className="flex items-start justify-between gap-3">
@@ -45,7 +48,7 @@ export function SnippetCard({ snippet }: { snippet: Snippet }) {
               {snippet.likes}
             </span>
           )}
-          <span className="text-xs text-muted-foreground">{date}</span>
+          <span className="text-xs text-muted-foreground" suppressHydrationWarning>{date}</span>
         </div>
       </div>
     </Link>

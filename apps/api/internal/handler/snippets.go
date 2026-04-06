@@ -28,6 +28,31 @@ func (h *SnippetHandler) GetAll(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
+func (h *SnippetHandler) GetByCategory(c *gin.Context) {
+	category := c.Param("category")
+	result, err := h.svc.GetByCategory(c.Request.Context(), category)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch snippets"})
+		return
+	}
+	if result == nil {
+		result = []snippets.Snippet{}
+	}
+	c.JSON(http.StatusOK, result)
+}
+
+func (h *SnippetHandler) GetCategories(c *gin.Context) {
+	result, err := h.svc.GetCategories(c.Request.Context())
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch categories"})
+		return
+	}
+	if result == nil {
+		result = []string{}
+	}
+	c.JSON(http.StatusOK, result)
+}
+
 func (h *SnippetHandler) GetBySlug(c *gin.Context) {
 	slug := c.Param("slug")
 	s, err := h.svc.GetBySlug(c.Request.Context(), slug)
@@ -47,6 +72,7 @@ type createSnippetRequest struct {
 	Slug        string   `json:"slug"`
 	Code        string   `json:"code" binding:"required"`
 	Language    string   `json:"language" binding:"required"`
+	Category    string   `json:"category"`
 	Description string   `json:"description"`
 	Tags        []string `json:"tags"`
 }
@@ -55,6 +81,7 @@ type updateSnippetRequest struct {
 	Title       *string  `json:"title"`
 	Code        *string  `json:"code"`
 	Language    *string  `json:"language"`
+	Category    *string  `json:"category"`
 	Description *string  `json:"description"`
 	Tags        []string `json:"tags"`
 }
@@ -71,6 +98,7 @@ func (h *SnippetHandler) Create(c *gin.Context) {
 		Slug:        req.Slug,
 		Code:        req.Code,
 		Language:    req.Language,
+		Category:    req.Category,
 		Description: req.Description,
 		Tags:        req.Tags,
 	}
@@ -113,6 +141,9 @@ func (h *SnippetHandler) Update(c *gin.Context) {
 	}
 	if req.Language != nil {
 		existing.Language = *req.Language
+	}
+	if req.Category != nil {
+		existing.Category = *req.Category
 	}
 	if req.Description != nil {
 		existing.Description = *req.Description

@@ -5,10 +5,12 @@ import { DefaultChatTransport } from "ai";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Turnstile from "react-turnstile";
 import { Bot, MessageCircle, Send, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!;
 
 export function ChatBot() {
+  const t = useTranslations("chatbot");
   const [isOpen, setIsOpen] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [input, setInput] = useState("");
@@ -66,27 +68,32 @@ export function ChatBot() {
       .join("");
   };
 
+  const suggestions = [
+    t("suggestion1"),
+    t("suggestion2"),
+    t("suggestion3"),
+  ];
+
   return (
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-all hover:scale-105 hover:shadow-xl active:scale-95"
-        aria-label={isOpen ? "Cerrar chat" : "Abrir chat"}
+        aria-label={isOpen ? t("closeChat") : t("openChat")}
       >
         {isOpen ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>
 
       {isOpen && (
         <div className="fixed bottom-24 right-6 z-50 flex h-125 w-95 max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
-          {/* Header */}
           <div className="flex items-center gap-3 border-b border-border bg-secondary/50 px-4 py-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/20">
               <Bot className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-foreground">Mrsan Bot</p>
+              <p className="text-sm font-semibold text-foreground">{t("botName")}</p>
               <p className="text-xs text-muted-foreground">
-                {isVerified ? "En línea" : "Verificando..."}
+                {isVerified ? t("online") : t("verifying")}
               </p>
             </div>
           </div>
@@ -99,10 +106,10 @@ export function ChatBot() {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-foreground">
-                    Verifica que eres humano
+                    {t("verifyTitle")}
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">
-                    Para proteger este chat de bots
+                    {t("verifyDescription")}
                   </p>
                 </div>
                 <Turnstile
@@ -120,18 +127,14 @@ export function ChatBot() {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-foreground">
-                        Hola! Soy el asistente de Marco
+                        {t("greeting")}
                       </p>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        Pregunta sobre su experiencia, proyectos o pide una cotización
+                        {t("greetingDescription")}
                       </p>
                     </div>
                     <div className="mt-2 flex flex-wrap justify-center gap-2">
-                      {[
-                        "¿Qué tecnologías domina?",
-                        "¿Está disponible para freelance?",
-                        "Quiero una cotización",
-                      ].map((suggestion) => (
+                      {suggestions.map((suggestion) => (
                         <button
                           key={suggestion}
                           onClick={() => handleSend(suggestion)}
@@ -177,7 +180,7 @@ export function ChatBot() {
 
                 {error && (
                   <div className="mb-3 rounded-lg bg-destructive/10 p-3 text-xs text-destructive-foreground">
-                    Error: No se pudo enviar el mensaje. Intenta de nuevo.
+                    {t("error")}
                   </div>
                 )}
 
@@ -196,7 +199,7 @@ export function ChatBot() {
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Escribe tu mensaje..."
+                placeholder={t("placeholder")}
                 className="flex-1 rounded-xl border border-border bg-input px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 disabled={isLoading}
               />
@@ -204,7 +207,7 @@ export function ChatBot() {
                 type="submit"
                 disabled={isLoading || !input.trim()}
                 className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
-                aria-label="Enviar mensaje"
+                aria-label={t("send")}
               >
                 <Send className="h-4 w-4" />
               </button>

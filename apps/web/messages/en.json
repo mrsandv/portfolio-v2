@@ -1,0 +1,172 @@
+{
+  "nav": {
+    "projects": "Projects",
+    "snippets": "Snippets",
+    "about": "About",
+    "hireMe": "Hire Me"
+  },
+  "hero": {
+    "status": "Available for new opportunities",
+    "title": "Your idea, my <highlight>code</highlight>. Web development that solves real problems.",
+    "description": "7+ years building web applications. I share code, patterns, and real learnings because I believe good software is built in the open.",
+    "hireMe": "Hire Me",
+    "browseProjects": "Browse Projects",
+    "terminal": {
+      "stack": "> Go / React / Next.js / TypeScript / Node.js",
+      "experience": "> 7+ years shipping production code"
+    }
+  },
+  "projects": {
+    "sectionTitle": "Projects in progress",
+    "inProgress": "In progress",
+    "source": "Source",
+    "live": "Live",
+    "antojo": {
+      "description": "Say goodbye to group decision fatigue. An app to prioritize restaurants based on your friends' genuine enthusiasm, not just endless lists."
+    },
+    "lunaDeMiel": {
+      "description": "Tired of your ordinary nails? Soon we'll have a kawaii experience at your fingertips."
+    },
+    "palChesco": {
+      "description": "A way to contribute to Mexican projects and help each other out among creators."
+    }
+  },
+  "projectsPage": {
+    "title": "Projects",
+    "description": "Some of the projects I've worked on. Each with its own challenges and learnings.",
+    "back": "Back",
+    "problem": "The Problem",
+    "solution": "The Solution",
+    "techStack": "Tech Stack",
+    "results": "Results",
+    "testimonial": "What they say",
+    "visitSite": "Visit site",
+    "backToProjects": "All projects"
+  },
+  "topSnippets": {
+    "title": "Top Snippets",
+    "viewAll": "View all"
+  },
+  "snippetsPage": {
+    "back": "Back",
+    "title": "Code Snippets",
+    "description": "A collection of useful code snippets, algorithms, and patterns I use and reference.",
+    "empty": "No snippets yet.",
+    "allSnippets": "All Snippets",
+    "allCategories": "All",
+    "categoryTitle": "{category} Snippets",
+    "categoryDescription": "Explore {category} snippets and patterns.",
+    "backToSnippets": "All snippets"
+  },
+  "snippetDetail": {
+    "notFoundTitle": "Snippet not found",
+    "notFoundDescription": "The snippet you're looking for doesn't exist.",
+    "browseAll": "Browse all snippets"
+  },
+  "actions": {
+    "like": "Like",
+    "unlike": "Unlike",
+    "share": "Share:",
+    "copyLink": "Copy link",
+    "shareTwitter": "Share on X",
+    "shareLinkedIn": "Share on LinkedIn",
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "chatbot": {
+    "openChat": "Open chat",
+    "closeChat": "Close chat",
+    "botName": "Mrsan Bot",
+    "online": "Online",
+    "verifying": "Verifying...",
+    "verifyTitle": "Verify you're human",
+    "verifyDescription": "To protect this chat from bots",
+    "greeting": "Hi! I'm Marco's assistant",
+    "greetingDescription": "Ask about his experience, projects, or request a quote",
+    "suggestion1": "What technologies does he use?",
+    "suggestion2": "Is he available for freelance?",
+    "suggestion3": "I'd like a quote",
+    "error": "Error: Could not send the message. Please try again.",
+    "placeholder": "Type your message...",
+    "send": "Send message"
+  },
+  "footer": {
+    "builtBy": "Built with 💜 by mrsan"
+  },
+  "testimonials": {
+    "title": "What they say",
+    "placeholder1": {
+      "quote": "Marco delivered exactly what we needed, on time and with excellent communication.",
+      "author": "Client 1",
+      "role": "Company"
+    },
+    "placeholder2": {
+      "quote": "His technical approach and ability to understand the business made all the difference in our project.",
+      "author": "Client 2",
+      "role": "Startup"
+    }
+  },
+  "cta": {
+    "title": "Have a project in mind?",
+    "description": "Let's talk. I like to understand the problem before proposing solutions — no strings attached.",
+    "step1Title": "What do you need?",
+    "projectTypes": {
+      "webapp": "Web app",
+      "landing": "Landing page",
+      "api": "API / Backend",
+      "mobile": "Mobile app",
+      "other": "Other"
+    },
+    "step2Title": "Project details",
+    "maturityLabel": "How far along is your idea?",
+    "maturity": {
+      "idea": "Just an idea",
+      "wireframes": "I have wireframes or designs",
+      "existing": "Something exists, needs improvement",
+      "ready": "All defined, need execution"
+    },
+    "timelineLabel": "When do you need it?",
+    "timelines": {
+      "asap": "As soon as possible",
+      "months": "1 – 2 months",
+      "nohurry": "No rush",
+      "exploring": "Just exploring"
+    },
+    "step3Title": "Tell me more",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "you@email.com",
+    "messagePlaceholder": "Briefly describe your idea or project...",
+    "submit": "Send message",
+    "sending": "Sending...",
+    "success": "Message sent!",
+    "successDescription": "I'll get back to you within 24 hours.",
+    "error": "Could not send. Please try again.",
+    "next": "Next",
+    "back": "Back",
+    "stepOf": "Step {current} of {total}"
+  },
+  "about": {
+    "title": "About me",
+    "bio": "I'm Marco, a software engineer with over 7 years of experience building scalable web solutions. I specialize in architecting high-performance backend services with Go and modern frontends with React/Next.js. I've transformed manual business operations into automated, efficient systems, and led technical teams in high-growth fintech environments.",
+    "bioPersonal": "I love to collaborate. I believe the best projects come from good communication and mutual trust. If you have an idea, let's talk — I enjoy understanding the problem before writing the first line of code.",
+    "skillsTitle": "Tech Stack",
+    "processTitle": "My work process",
+    "processStep1Title": "Discovery",
+    "processStep1Description": "I understand your business, your users, and the real problem we need to solve. Without this, code doesn't matter.",
+    "processStep2Title": "Proposal",
+    "processStep2Description": "I define architecture, tech stack, and timeline. Transparent from day one — no surprises.",
+    "processStep3Title": "Development",
+    "processStep3Description": "I iterate fast with incremental deliveries. I integrate AI tools into the workflow to maintain speed without sacrificing quality.",
+    "processStep4Title": "Delivery",
+    "processStep4Description": "Deploy, documentation, and clean handoff. Your project works and you know how to maintain it.",
+    "experienceTitle": "Experience",
+    "educationTitle": "Education",
+    "languagesTitle": "Languages",
+    "spanish": "Spanish — Native",
+    "english": "English — Working Proficiency (B2)",
+    "location": "Mexico City"
+  },
+  "locale": {
+    "switchTo": "ES"
+  }
+}

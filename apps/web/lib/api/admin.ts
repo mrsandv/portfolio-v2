@@ -54,6 +54,7 @@ export interface Snippet {
   slug: string;
   code: string;
   language: string;
+  category: string;
   description: string;
   tags: string[];
   likes: number;
@@ -73,6 +74,7 @@ export async function adminCreateSnippet(data: {
   title: string;
   code: string;
   language: string;
+  category?: string;
   description?: string;
   tags?: string[];
 }) {
@@ -94,6 +96,7 @@ export async function adminUpdateSnippet(
     title?: string;
     code?: string;
     language?: string;
+    category?: string;
     description?: string;
     tags?: string[];
   }

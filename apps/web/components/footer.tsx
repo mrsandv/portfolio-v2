@@ -1,4 +1,7 @@
+"use client";
+
 import { Github, Linkedin, Terminal } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const socials = [
   { label: "GitHub", href: "https://github.com/mrsandv", icon: Github },
@@ -10,6 +13,8 @@ const socials = [
 ];
 
 export function Footer() {
+  const t = useTranslations("footer");
+
   return (
     <footer className="border-t border-border px-6 py-6">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 md:flex-row md:justify-between">
@@ -35,7 +40,7 @@ export function Footer() {
           ))}
         </div>
 
-        <p className="text-xs text-muted-foreground">{`Built with 💜 by mrsan`}</p>
+        <p className="text-xs text-muted-foreground">{t("builtBy")}</p>
       </div>
     </footer>
   );

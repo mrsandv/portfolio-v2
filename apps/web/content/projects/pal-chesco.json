@@ -1,0 +1,25 @@
+{
+  "title": "Pal' Chesco",
+  "slug": "pal-chesco",
+  "shortDescription": {
+    "es": "Una forma de contribuir a proyectos mexicanos y ayudarnos entre creadores.",
+    "en": "A way to contribute to Mexican projects and help each other out among creators."
+  },
+  "problem": {
+    "es": "Los creadores mexicanos necesitan una plataforma donde puedan apoyarse mutuamente y dar visibilidad a sus proyectos.",
+    "en": "Mexican creators need a platform where they can support each other and give visibility to their projects."
+  },
+  "solution": {
+    "es": "Una plataforma comunitaria para que creadores compartan, colaboren y contribuyan a proyectos mexicanos.",
+    "en": "A community platform for creators to share, collaborate, and contribute to Mexican projects."
+  },
+  "techStack": ["Go"],
+  "screenshots": [],
+  "results": {
+    "es": "En fase de concepto.",
+    "en": "In concept phase."
+  },
+  "testimonial": null,
+  "url": "",
+  "featured": false
+}

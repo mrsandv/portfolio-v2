@@ -7,7 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/mrsan/portfolio-api/internal/config"
 	"github.com/mrsan/portfolio-api/internal/domain/admin"
+	"github.com/mrsan/portfolio-api/internal/domain/contact"
 	"github.com/mrsan/portfolio-api/internal/domain/featureflags"
+	"github.com/mrsan/portfolio-api/internal/domain/profile"
 	"github.com/mrsan/portfolio-api/internal/domain/snippets"
 	"github.com/mrsan/portfolio-api/internal/handler"
 	"github.com/mrsan/portfolio-api/internal/repository"
@@ -49,6 +51,14 @@ func main() {
 	snippetSvc := snippets.NewService(snippetRepo)
 	snippetHandler := handler.NewSnippetHandler(snippetSvc)
 
+	profileRepo := repository.NewMongoProfileRepo(db)
+	profileSvc := profile.NewService(profileRepo)
+	profileHandler := handler.NewProfileHandler(profileSvc)
+
+	contactRepo := repository.NewMongoContactRepo(db)
+	contactSvc := contact.NewService(contactRepo)
+	contactHandler := handler.NewContactHandler(contactSvc, cfg.TurnstileSecret)
+
 	adminRepo := repository.NewMongoAdminRepo(db)
 	adminSvc := admin.NewService(adminRepo)
 	adminHandler := handler.NewAdminHandler(adminSvc, cfg.JWTSecret)
@@ -66,8 +76,13 @@ func main() {
 		api.GET("/flags", flagHandler.GetAll)
 		api.PUT("/flags", middleware.APIKey(cfg.APIKey), flagHandler.Toggle)
 
+		api.GET("/profile", profileHandler.Get)
+		api.POST("/contact", contactHandler.Submit)
+
 		api.GET("/snippets", snippetHandler.GetAll)
 		api.GET("/snippets/top", snippetHandler.GetTopLiked)
+		api.GET("/snippets/categories", snippetHandler.GetCategories)
+		api.GET("/snippets/category/:category", snippetHandler.GetByCategory)
 		api.GET("/snippets/:slug", snippetHandler.GetBySlug)
 		api.POST("/snippets", middleware.APIKey(cfg.APIKey), snippetHandler.Create)
 		api.POST("/snippets/:slug/like", snippetHandler.ToggleLike)
@@ -86,6 +101,9 @@ func main() {
 		protected.Use(middleware.JWTAuth(cfg.JWTSecret))
 		{
 			protected.GET("/me", adminHandler.Me)
+			protected.PUT("/profile", profileHandler.Upsert)
+			protected.GET("/contact", contactHandler.GetAll)
+			protected.PUT("/contact/:id/read", contactHandler.MarkRead)
 			protected.PUT("/password", adminHandler.ChangePassword)
 			protected.GET("/flags", flagHandler.GetAll)
 			protected.PUT("/flags", flagHandler.Toggle)

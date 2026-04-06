@@ -11,6 +11,7 @@ export default function EditSnippet({ params }: { params: Promise<{ slug: string
   const [title, setTitle] = useState("");
   const [code, setCode] = useState("");
   const [language, setLanguage] = useState("");
+  const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
   const [error, setError] = useState("");
@@ -30,6 +31,7 @@ export default function EditSnippet({ params }: { params: Promise<{ slug: string
         setTitle(found.title);
         setCode(found.code);
         setLanguage(found.language);
+        setCategory(found.category || "");
         setDescription(found.description || "");
         setTags(found.tags?.join(", ") || "");
         setStatus(`Editing: ${found.title}`);
@@ -47,6 +49,7 @@ export default function EditSnippet({ params }: { params: Promise<{ slug: string
         title,
         code,
         language,
+        category,
         description,
         tags: tags
           ? tags.split(",").map((t) => t.trim()).filter(Boolean)
@@ -105,6 +108,15 @@ export default function EditSnippet({ params }: { params: Promise<{ slug: string
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
               required
+              style={{ marginBottom: 8 }}
+            />
+
+            <label className="retro-label">Category:</label>
+            <input
+              className="retro-input"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="react, rust, algorithms..."
               style={{ marginBottom: 8 }}
             />
 

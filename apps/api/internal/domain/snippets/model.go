@@ -12,6 +12,7 @@ type Snippet struct {
 	Slug        string        `bson:"slug" json:"slug"`
 	Code        string        `bson:"code" json:"code"`
 	Language    string        `bson:"language" json:"language"`
+	Category    string        `bson:"category" json:"category"`
 	Description string        `bson:"description" json:"description"`
 	Tags        []string      `bson:"tags" json:"tags"`
 	Likes       int           `bson:"likes" json:"likes"`

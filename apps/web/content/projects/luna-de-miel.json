@@ -1,0 +1,25 @@
+{
+  "title": "Luna de Miel Salon SPA",
+  "slug": "luna-de-miel",
+  "shortDescription": {
+    "es": "Pronto tendremos una experiencia kawaii al alcance de tus manos. Un sitio web para un salón SPA de uñas.",
+    "en": "Soon we'll have a kawaii experience at your fingertips. A website for a nail SPA salon."
+  },
+  "problem": {
+    "es": "El salón necesitaba presencia digital para atraer nuevos clientes y mostrar su estilo único kawaii.",
+    "en": "The salon needed a digital presence to attract new clients and showcase their unique kawaii style."
+  },
+  "solution": {
+    "es": "Un sitio web que captura la esencia kawaii del salón con una experiencia visual atractiva y funcional.",
+    "en": "A website that captures the salon's kawaii essence with an attractive and functional visual experience."
+  },
+  "techStack": ["React", "Tailwind CSS", "MongoDB", "Go"],
+  "screenshots": [],
+  "results": {
+    "es": "En desarrollo.",
+    "en": "In development."
+  },
+  "testimonial": null,
+  "url": "",
+  "featured": false
+}

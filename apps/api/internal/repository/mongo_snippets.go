@@ -39,6 +39,38 @@ func (r *MongoSnippetRepo) GetAll(ctx context.Context) ([]snippets.Snippet, erro
 	return result, nil
 }
 
+func (r *MongoSnippetRepo) GetByCategory(ctx context.Context, category string) ([]snippets.Snippet, error) {
+	opts := options.Find().SetSort(bson.D{{Key: "createdAt", Value: -1}})
+	filter := bson.D{{Key: "category", Value: category}}
+	cursor, err := r.col.Find(ctx, filter, opts)
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(ctx)
+
+	var result []snippets.Snippet
+	if err := cursor.All(ctx, &result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (r *MongoSnippetRepo) GetCategories(ctx context.Context) ([]string, error) {
+	var categories []string
+	result := r.col.Distinct(ctx, "category", bson.D{})
+	if err := result.Decode(&categories); err != nil {
+		return nil, err
+	}
+	// Filter out empty strings
+	filtered := categories[:0]
+	for _, c := range categories {
+		if c != "" {
+			filtered = append(filtered, c)
+		}
+	}
+	return filtered, nil
+}
+
 func (r *MongoSnippetRepo) GetBySlug(ctx context.Context, slug string) (*snippets.Snippet, error) {
 	var s snippets.Snippet
 	err := r.col.FindOne(ctx, bson.D{{Key: "slug", Value: slug}}).Decode(&s)

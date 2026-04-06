@@ -1,11 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 import { FeatureGatedWidgets } from "@/components/feature-gated-widgets";
+import { LocaleProvider } from "@/components/locale-provider";
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-ibm-plex",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Spacehole Tech | Mrsan - Portfolio and Info",
@@ -42,8 +47,8 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className="font-san antialiased">
+    <html lang="es" className="dark">
+      <body className={`${ibmPlexMono.variable} antialiased`}>
         {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
           <script
             defer
@@ -51,8 +56,10 @@ export default function RootLayout({
             data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
           />
         )}
-        <FeatureGatedWidgets />
-        {children}
+        <LocaleProvider>
+          <FeatureGatedWidgets />
+          {children}
+        </LocaleProvider>
       </body>
     </html>
   );

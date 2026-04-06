@@ -1,10 +1,22 @@
+"use client";
+
 import { Heart, TrendingUp } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { getTopSnippets } from "@/lib/api/snippets";
+import type { Snippet } from "@/lib/types/snippet";
 
-export async function TopSnippets() {
-  const snippets = await getTopSnippets();
+export function TopSnippets() {
+  const t = useTranslations("topSnippets");
+  const [snippets, setSnippets] = useState<Snippet[]>([]);
+
+  useEffect(() => {
+    fetch("/api/snippets/top")
+      .then((res) => (res.ok ? res.json() : []))
+      .then(setSnippets)
+      .catch(() => {});
+  }, []);
 
   if (snippets.length === 0) return null;
 
@@ -15,14 +27,14 @@ export async function TopSnippets() {
           <div className="flex items-center gap-3">
             <TrendingUp className="h-5 w-5 text-primary" />
             <h2 className="text-2xl font-bold tracking-tight text-foreground">
-              Top Snippets
+              {t("title")}
             </h2>
           </div>
           <Link
             href="/snippets"
             className="text-sm text-muted-foreground transition-colors hover:text-primary"
           >
-            View all
+            {t("viewAll")}
           </Link>
         </div>
 
@@ -30,7 +42,7 @@ export async function TopSnippets() {
           {snippets.map((snippet, i) => (
             <Link
               key={snippet.id}
-              href={`/snippets/${snippet.slug}`}
+              href={snippet.category ? `/snippets/${snippet.category}/${snippet.slug}` : `/snippets/${snippet.slug}`}
               className="group flex items-center gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/40"
             >
               <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-secondary font-mono text-sm font-semibold text-muted-foreground">

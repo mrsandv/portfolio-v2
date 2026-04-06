@@ -40,7 +40,7 @@ func (r *MongoAdminRepo) Create(ctx context.Context, user *admin.User) error {
 
 func (r *MongoAdminRepo) UpdatePassword(ctx context.Context, username, passwordHash string) error {
 	filter := bson.D{{Key: "username", Value: username}}
-	update := bson.D{{Key: "$set", Value: bson.D{{Key: "passwordhash", Value: passwordHash}}}}
+	update := bson.D{{Key: "$set", Value: bson.D{{Key: "passwordHash", Value: passwordHash}}}}
 	_, err := r.col.UpdateOne(ctx, filter, update)
 	return err
 }

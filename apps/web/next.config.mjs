@@ -12,6 +12,14 @@ const nextConfig = {
       process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
     return [
       {
+        source: "/api/contact",
+        destination: `${apiUrl}/api/contact`,
+      },
+      {
+        source: "/api/profile",
+        destination: `${apiUrl}/api/profile`,
+      },
+      {
         source: "/api/flags",
         destination: `${apiUrl}/api/flags`,
       },
@@ -22,6 +30,14 @@ const nextConfig = {
       {
         source: "/api/snippets/top",
         destination: `${apiUrl}/api/snippets/top`,
+      },
+      {
+        source: "/api/snippets/categories",
+        destination: `${apiUrl}/api/snippets/categories`,
+      },
+      {
+        source: "/api/snippets/category/:category",
+        destination: `${apiUrl}/api/snippets/category/:category`,
       },
       {
         source: "/api/snippets/:slug/like",

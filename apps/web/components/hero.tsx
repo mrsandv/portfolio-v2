@@ -1,38 +1,44 @@
+"use client";
+
 import { ArrowRight, Briefcase, Code2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
-export function Hero({ staticLinks }) {
+export function Hero({ staticLinks }: { staticLinks: Record<string, string> }) {
+  const t = useTranslations("hero");
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-20">
       <div
         className="pointer-events-none absolute top-1/4 left-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20"
         style={{
           background:
-            "radial-gradient(circle, oklch(0.75 0.15 195 / 0.4), transparent 70%)",
+            "radial-gradient(circle, oklch(0.55 0.25 290 / 0.3), transparent 70%)",
         }}
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto max-w-3xl text-center">
+      <div className="relative z-10 mx-auto max-w-4xl text-center">
         <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-4 py-1.5">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
           </span>
           <span className="text-xs font-medium text-muted-foreground">
-            Available for new opportunities
+            {t("status")}
           </span>
         </div>
 
         <h1 className="text-balance text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
-          I develop <span className="text-primary">digital products</span>:
-          value for your business, simplicity for your users.
+          {t.rich("title", {
+            highlight: (chunks) => (
+              <span className="text-primary">{chunks}</span>
+            ),
+          })}
         </h1>
 
         <p className="mx-auto mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-          I'm a software engineer specializing in building high-performance web
-          applications. Here I share real code, design patterns, and what I've
-          learned solving problems in production.
+          {t("description")}
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -43,7 +49,7 @@ export function Hero({ staticLinks }) {
           >
             <a target="_blank" href={staticLinks.linkedIn}>
               <Briefcase className="mr-2 h-4 w-4" />
-              Hire Me
+              {t("hireMe")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </a>
           </Button>
@@ -55,7 +61,7 @@ export function Hero({ staticLinks }) {
           >
             <a href="#projects">
               <Code2 className="mr-2 h-4 w-4" />
-              Browse Projects
+              {t("browseProjects")}
             </a>
           </Button>
         </div>
@@ -66,10 +72,10 @@ export function Hero({ staticLinks }) {
             <span className="text-foreground">whoami</span>
           </div>
           <div className="mt-2 text-muted-foreground text-left ml-4">
-            {">"} Go / React / Next.js / TypeScript / Node.js
+            {t("terminal.stack")}
           </div>
           <div className="text-muted-foreground text-left ml-4">
-            {">"} 7+ years shipping production code
+            {t("terminal.experience")}
           </div>
           <div className="mt-2 flex items-center gap-2 text-muted-foreground">
             <span className="text-primary">$</span>

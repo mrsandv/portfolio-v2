@@ -4,6 +4,7 @@ export interface Snippet {
   slug: string;
   code: string;
   language: string;
+  category: string;
   description: string;
   tags: string[];
   likes: number;

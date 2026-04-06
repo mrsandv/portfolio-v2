@@ -23,6 +23,14 @@ func (s *Service) GetBySlug(ctx context.Context, slug string) (*Snippet, error) 
 	return s.repo.GetBySlug(ctx, slug)
 }
 
+func (s *Service) GetByCategory(ctx context.Context, category string) ([]Snippet, error) {
+	return s.repo.GetByCategory(ctx, category)
+}
+
+func (s *Service) GetCategories(ctx context.Context) ([]string, error) {
+	return s.repo.GetCategories(ctx)
+}
+
 func (s *Service) Create(ctx context.Context, snippet *Snippet) error {
 	now := time.Now()
 	snippet.CreatedAt = now

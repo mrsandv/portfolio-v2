@@ -1,0 +1,172 @@
+{
+  "nav": {
+    "projects": "Proyectos",
+    "snippets": "Snippets",
+    "about": "Sobre mí",
+    "hireMe": "Contrátame"
+  },
+  "hero": {
+    "status": "Disponible para nuevas oportunidades",
+    "title": "Tu idea, mi <highlight>código</highlight>. Desarrollo web que resuelve problemas reales.",
+    "description": "7+ años construyendo aplicaciones web. Comparto código, patrones y aprendizajes reales porque creo que el buen software se hace en abierto.",
+    "hireMe": "Contrátame",
+    "browseProjects": "Ver Proyectos",
+    "terminal": {
+      "stack": "> Go / React / Next.js / TypeScript / Node.js",
+      "experience": "> 7+ años enviando código a producción"
+    }
+  },
+  "projects": {
+    "sectionTitle": "Proyectos en progreso",
+    "inProgress": "En progreso",
+    "source": "Código",
+    "live": "Demo",
+    "antojo": {
+      "description": "Di adiós a la fatiga de decidir en grupo. Una app para priorizar restaurantes basándose en el entusiasmo real de tus amigos, no solo en listas interminables."
+    },
+    "lunaDeMiel": {
+      "description": "¿Cansada de tus uñas de siempre? Pronto tendremos una experiencia kawaii al alcance de tus manos."
+    },
+    "palChesco": {
+      "description": "Una forma de contribuir a proyectos mexicanos y ayudarnos entre creadores."
+    }
+  },
+  "projectsPage": {
+    "title": "Proyectos",
+    "description": "Algunos de los proyectos en los que he trabajado. Cada uno con sus propios retos y aprendizajes.",
+    "back": "Regresar",
+    "problem": "El Problema",
+    "solution": "La Solución",
+    "techStack": "Tech Stack",
+    "results": "Resultados",
+    "testimonial": "Lo que dicen",
+    "visitSite": "Visitar sitio",
+    "backToProjects": "Todos los proyectos"
+  },
+  "topSnippets": {
+    "title": "Top Snippets",
+    "viewAll": "Ver todos"
+  },
+  "snippetsPage": {
+    "back": "Regresar",
+    "title": "Snippets de Código",
+    "description": "Una colección de snippets de código útiles, algoritmos y patrones que uso y consulto.",
+    "empty": "Aún no hay snippets.",
+    "allSnippets": "Todos los Snippets",
+    "allCategories": "Todas",
+    "categoryTitle": "Snippets de {category}",
+    "categoryDescription": "Explora snippets y patrones de {category}.",
+    "backToSnippets": "Todos los snippets"
+  },
+  "snippetDetail": {
+    "notFoundTitle": "Snippet no encontrado",
+    "notFoundDescription": "El snippet que buscas no existe.",
+    "browseAll": "Ver todos los snippets"
+  },
+  "actions": {
+    "like": "Me gusta",
+    "unlike": "Ya no me gusta",
+    "share": "Compartir:",
+    "copyLink": "Copiar enlace",
+    "shareTwitter": "Compartir en X",
+    "shareLinkedIn": "Compartir en LinkedIn",
+    "copy": "Copiar",
+    "copied": "Copiado"
+  },
+  "chatbot": {
+    "openChat": "Abrir chat",
+    "closeChat": "Cerrar chat",
+    "botName": "Mrsan Bot",
+    "online": "En línea",
+    "verifying": "Verificando...",
+    "verifyTitle": "Verifica que eres humano",
+    "verifyDescription": "Para proteger este chat de bots",
+    "greeting": "¡Hola! Soy el asistente de Marco",
+    "greetingDescription": "Pregunta sobre su experiencia, proyectos o pide una cotización",
+    "suggestion1": "¿Qué tecnologías domina?",
+    "suggestion2": "¿Está disponible para freelance?",
+    "suggestion3": "Quiero una cotización",
+    "error": "Error: No se pudo enviar el mensaje. Intenta de nuevo.",
+    "placeholder": "Escribe tu mensaje...",
+    "send": "Enviar mensaje"
+  },
+  "footer": {
+    "builtBy": "Hecho con 💜 por mrsan"
+  },
+  "testimonials": {
+    "title": "Lo que dicen",
+    "placeholder1": {
+      "quote": "Marco entregó exactamente lo que necesitábamos, en tiempo y con una comunicación excelente.",
+      "author": "Cliente 1",
+      "role": "Empresa"
+    },
+    "placeholder2": {
+      "quote": "Su enfoque técnico y capacidad de entender el negocio hicieron toda la diferencia en nuestro proyecto.",
+      "author": "Cliente 2",
+      "role": "Startup"
+    }
+  },
+  "cta": {
+    "title": "¿Tienes un proyecto en mente?",
+    "description": "Platiquemos. Me gusta entender el problema antes de proponer soluciones — sin compromiso.",
+    "step1Title": "¿Qué necesitas?",
+    "projectTypes": {
+      "webapp": "App web",
+      "landing": "Landing page",
+      "api": "API / Backend",
+      "mobile": "App móvil",
+      "other": "Otro"
+    },
+    "step2Title": "Detalles del proyecto",
+    "maturityLabel": "¿Qué tan avanzada está tu idea?",
+    "maturity": {
+      "idea": "Solo es una idea",
+      "wireframes": "Tengo wireframes o diseño",
+      "existing": "Ya existe algo, necesito mejorarlo",
+      "ready": "Todo definido, necesito ejecución"
+    },
+    "timelineLabel": "¿Para cuándo?",
+    "timelines": {
+      "asap": "Lo antes posible",
+      "months": "1 – 2 meses",
+      "nohurry": "Sin prisa",
+      "exploring": "Solo explorando"
+    },
+    "step3Title": "Cuéntame más",
+    "namePlaceholder": "Tu nombre",
+    "emailPlaceholder": "tu@email.com",
+    "messagePlaceholder": "Describe brevemente tu idea o proyecto...",
+    "submit": "Enviar mensaje",
+    "sending": "Enviando...",
+    "success": "¡Mensaje enviado!",
+    "successDescription": "Te respondo en menos de 24 horas.",
+    "error": "No se pudo enviar. Intenta de nuevo.",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "stepOf": "Paso {current} de {total}"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "bio": "Soy Marco, ingeniero de software con más de 7 años de experiencia construyendo soluciones web escalables. Me especializo en arquitectura de servicios backend de alto rendimiento con Go y frontends modernos con React/Next.js. He transformado operaciones manuales de negocio en sistemas automatizados y eficientes, y he liderado equipos técnicos en entornos fintech de alto crecimiento.",
+    "bioPersonal": "Me gusta colaborar. Creo que los mejores proyectos nacen de una buena comunicación y confianza mutua. Si tienes una idea, platiquemos — disfruto entender el problema antes de escribir la primera línea de código.",
+    "skillsTitle": "Tech Stack",
+    "processTitle": "Mi proceso de trabajo",
+    "processStep1Title": "Descubrimiento",
+    "processStep1Description": "Entiendo tu negocio, tus usuarios y el problema real que necesitamos resolver. Sin esto, el código no importa.",
+    "processStep2Title": "Propuesta",
+    "processStep2Description": "Defino arquitectura, tech stack y timeline. Transparente desde el día uno — sin sorpresas.",
+    "processStep3Title": "Desarrollo",
+    "processStep3Description": "Itero rápido con entregas incrementales. Integro herramientas de IA en el flujo para mantener velocidad sin sacrificar calidad.",
+    "processStep4Title": "Entrega",
+    "processStep4Description": "Deploy, documentación y handoff limpio. Tu proyecto queda funcionando y tú sabes cómo mantenerlo.",
+    "experienceTitle": "Experiencia",
+    "educationTitle": "Educación",
+    "languagesTitle": "Idiomas",
+    "spanish": "Español — Nativo",
+    "english": "Inglés — Profesional (B2)",
+    "location": "Ciudad de México"
+  },
+  "locale": {
+    "switchTo": "EN"
+  }
+}

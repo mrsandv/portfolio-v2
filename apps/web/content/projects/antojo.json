@@ -1,0 +1,25 @@
+{
+  "title": "Antojo",
+  "slug": "antojo",
+  "shortDescription": {
+    "es": "Di adiós a la fatiga de decidir en grupo. Una app para priorizar restaurantes basándose en el entusiasmo real de tus amigos.",
+    "en": "Say goodbye to group decision fatigue. An app to prioritize restaurants based on your friends' genuine enthusiasm."
+  },
+  "problem": {
+    "es": "Elegir dónde comer en grupo siempre termina en listas interminables y nadie decide. La fatiga de decisión mata la experiencia antes de empezar.",
+    "en": "Choosing where to eat as a group always ends in endless lists with no one deciding. Decision fatigue kills the experience before it starts."
+  },
+  "solution": {
+    "es": "Una app en tiempo real donde cada persona vota con su nivel de entusiasmo real. El algoritmo prioriza basándose en preferencias genuinas, no en compromiso tibio.",
+    "en": "A real-time app where each person votes with their genuine enthusiasm level. The algorithm prioritizes based on real preferences, not lukewarm compromise."
+  },
+  "techStack": ["React", "Tailwind CSS", "WebSockets", "MongoDB", "Go"],
+  "screenshots": [],
+  "results": {
+    "es": "En desarrollo activo. Prototipo funcional con sistema de votación en tiempo real.",
+    "en": "In active development. Working prototype with real-time voting system."
+  },
+  "testimonial": null,
+  "url": "",
+  "featured": true
+}

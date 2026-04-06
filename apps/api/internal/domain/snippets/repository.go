@@ -5,6 +5,8 @@ import "context"
 type Repository interface {
 	GetAll(ctx context.Context) ([]Snippet, error)
 	GetBySlug(ctx context.Context, slug string) (*Snippet, error)
+	GetByCategory(ctx context.Context, category string) ([]Snippet, error)
+	GetCategories(ctx context.Context) ([]string, error)
 	GetTopLiked(ctx context.Context, limit int) ([]Snippet, error)
 	Create(ctx context.Context, s *Snippet) error
 	Update(ctx context.Context, slug string, s *Snippet) error

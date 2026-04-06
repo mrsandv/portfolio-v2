@@ -9,6 +9,7 @@ export default function NewSnippet() {
   const [title, setTitle] = useState("");
   const [code, setCode] = useState("");
   const [language, setLanguage] = useState("");
+  const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
   const [error, setError] = useState("");
@@ -28,6 +29,7 @@ export default function NewSnippet() {
         title,
         code,
         language,
+        category: category || undefined,
         description: description || undefined,
         tags: tags
           ? tags.split(",").map((t) => t.trim()).filter(Boolean)
@@ -76,6 +78,15 @@ export default function NewSnippet() {
               onChange={(e) => setLanguage(e.target.value)}
               placeholder="go, typescript, python..."
               required
+              style={{ marginBottom: 8 }}
+            />
+
+            <label className="retro-label">Category:</label>
+            <input
+              className="retro-input"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="react, rust, algorithms..."
               style={{ marginBottom: 8 }}
             />
 

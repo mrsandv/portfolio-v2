@@ -1,36 +1,24 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar } from "lucide-react";
 import Markdown from "react-markdown";
-import { getSnippetBySlug } from "@/lib/api/snippets";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { CodeBlock } from "@/components/snippets/code-block";
 import { LikeButton } from "@/components/snippets/like-button";
 import { ShareButtons } from "@/components/snippets/share-buttons";
+import { useLocale } from "@/components/locale-provider";
+import type { Snippet } from "@/lib/types/snippet";
 
-type Props = { params: Promise<{ slug: string }> };
+export function SnippetDetailContent({ snippet }: { snippet: Snippet }) {
+  const t = useTranslations("snippetsPage");
+  const { locale } = useLocale();
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const snippet = await getSnippetBySlug(slug);
-  if (!snippet) return { title: "Snippet Not Found" };
-  return {
-    title: `${snippet.title} | Code Snippets | Spacehole Tech`,
-    description: snippet.description?.slice(0, 160),
-  };
-}
-
-export default async function SnippetPage({ params }: Props) {
-  const { slug } = await params;
-  const snippet = await getSnippetBySlug(slug);
-  if (!snippet) notFound();
-
-  const date = new Date(snippet.createdAt).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const date = new Date(snippet.createdAt).toLocaleDateString(
+    locale === "es" ? "es-MX" : "en-US",
+    { year: "numeric", month: "long", day: "numeric" }
+  );
 
   return (
     <main className="min-h-screen bg-background">
@@ -40,7 +28,7 @@ export default async function SnippetPage({ params }: Props) {
           className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
         >
           <ArrowLeft className="size-4" />
-          All Snippets
+          {t("allSnippets")}
         </Link>
 
         <header className="mb-8">
