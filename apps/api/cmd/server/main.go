@@ -57,7 +57,7 @@ func main() {
 
 	contactRepo := repository.NewMongoContactRepo(db)
 	contactSvc := contact.NewService(contactRepo)
-	contactHandler := handler.NewContactHandler(contactSvc, cfg.TurnstileSecret)
+	contactHandler := handler.NewContactHandler(contactSvc, cfg.TurnstileSecret, cfg.TelegramBotToken, cfg.TelegramChatID)
 
 	adminRepo := repository.NewMongoAdminRepo(db)
 	adminSvc := admin.NewService(adminRepo)

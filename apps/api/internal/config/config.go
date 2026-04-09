@@ -10,6 +10,8 @@ type Config struct {
 	JWTSecret         string
 	AllowedOrigins    string
 	TurnstileSecret   string
+	TelegramBotToken  string
+	TelegramChatID    string
 }
 
 func Load() *Config {
@@ -21,6 +23,8 @@ func Load() *Config {
 		JWTSecret:         getEnv("JWT_SECRET", "change-me-in-production"),
 		AllowedOrigins:    getEnv("ALLOWED_ORIGINS", "http://localhost:3000"),
 		TurnstileSecret:   getEnv("TURNSTILE_SECRET_KEY", ""),
+		TelegramBotToken:  getEnv("TELEGRAM_BOT_TOKEN", ""),
+		TelegramChatID:    getEnv("TELEGRAM_CHAT_ID", ""),
 	}
 }
 

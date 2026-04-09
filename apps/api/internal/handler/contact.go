@@ -2,20 +2,30 @@ package handler
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"net/url"
 	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mrsan/portfolio-api/internal/domain/contact"
+	"github.com/rs/zerolog/log"
 )
 
 type ContactHandler struct {
-	svc             *contact.Service
-	turnstileSecret string
+	svc              *contact.Service
+	turnstileSecret  string
+	telegramBotToken string
+	telegramChatID   string
 }
 
-func NewContactHandler(svc *contact.Service, turnstileSecret string) *ContactHandler {
-	return &ContactHandler{svc: svc, turnstileSecret: turnstileSecret}
+func NewContactHandler(svc *contact.Service, turnstileSecret, telegramBotToken, telegramChatID string) *ContactHandler {
+	return &ContactHandler{
+		svc:              svc,
+		turnstileSecret:  turnstileSecret,
+		telegramBotToken: telegramBotToken,
+		telegramChatID:   telegramChatID,
+	}
 }
 
 type contactRequest struct {
@@ -57,7 +67,30 @@ func (h *ContactHandler) Submit(c *gin.Context) {
 		return
 	}
 
+	go h.notifyTelegram(r)
+
 	c.JSON(http.StatusCreated, gin.H{"message": "request submitted"})
+}
+
+func (h *ContactHandler) notifyTelegram(r *contact.Request) {
+	if h.telegramBotToken == "" || h.telegramChatID == "" {
+		return
+	}
+
+	text := fmt.Sprintf(
+		"🔔 *Nuevo lead*\n\n*Nombre:* %s\n*Email:* %s\n*Tipo:* %s\n*Madurez:* %s\n*Timeline:* %s\n*Mensaje:* %s",
+		r.Name, r.Email, r.ProjectType, r.Maturity, r.Timeline, r.Message,
+	)
+
+	endpoint := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage", h.telegramBotToken)
+	_, err := http.PostForm(endpoint, url.Values{
+		"chat_id":    {h.telegramChatID},
+		"text":       {text},
+		"parse_mode": {"Markdown"},
+	})
+	if err != nil {
+		log.Error().Err(err).Msg("failed to send telegram notification")
+	}
 }
 
 func (h *ContactHandler) GetAll(c *gin.Context) {

@@ -48,6 +48,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="dark">
+      <head>
+        <meta name="google-adsense-account" content="ca-pub-3325323133144165" />
+        {process.env.NEXT_PUBLIC_ADSENSE_ID && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
+            crossOrigin="anonymous"
+          />
+        )}
+      </head>
       <body className={`${ibmPlexMono.variable} antialiased`}>
         {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
           <script
